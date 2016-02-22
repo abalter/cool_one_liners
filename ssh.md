@@ -2,7 +2,7 @@ Rsync without a tunnel
 
     rsync -ave "ssh -A user@tunnel-server ssh" <source> <target>
     
-where `<source>` or `<target> can be on the server behind the firewall.
+where `<source>` or `<target>` can be on the server behind the firewall.
 
 For example:
 
