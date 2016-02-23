@@ -7,13 +7,13 @@ https://stackoverflow.com/questions/16654751/rsync-through-ssh-tunnel/21787966#2
 
 Rsync without a tunnel
 
-    rsync -ave "ssh user@tunnel-server ssh" <source> <target>
+    rsync -arve "ssh user@tunnel-server ssh" <source> <target>
     
 where `<source>` or `<target>` can be on the server behind the firewall.
 
 For example:
 
-    rsync -ave "ssh me@acc.ohsu.edu ssh" my-directory me@exacloud.ohsu.edu:/home/users/me/some-directory
+    rsync -arve "ssh me@acc.ohsu.edu ssh" my-directory me@exacloud.ohsu.edu:/home/users/me/some-directory
     
 ## Ionice
 
