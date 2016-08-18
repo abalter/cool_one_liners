@@ -10,3 +10,6 @@ Finding multiple start/stop positions of one string in another with overlap:
 [(7, 15), (12, 20), (33, 41)]
 >>> 
 ```
+
+http://stackoverflow.com/a/4664889/188963
+http://stackoverflow.com/a/37313669/188963
