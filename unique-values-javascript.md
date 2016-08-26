@@ -30,3 +30,14 @@ function(item, index, original_array)
   }
 });
 ```
+
+In a program, I might use:
+
+```
+function getUniqueValues(array)
+{
+  return array.filter(function(item, index, arr){return arr.indexOf(item) == index;});
+}
+```
+
+so it's obvious what I'm doing in the main code.
