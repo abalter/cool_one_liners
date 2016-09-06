@@ -18,6 +18,5 @@ Run the script as follows:
     chmod +x rr.sh
     ./rr.sh filename.txt
 
-....
+http://stackoverflow.com/a/10929511/188963
 
-Where is the SO reference?
