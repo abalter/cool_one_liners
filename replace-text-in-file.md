@@ -28,6 +28,7 @@ to do in-place replacement with sed
     sed -i '34s/AAA/BBB/' file_name
     
 
+**Lots of methods**
 http://unix.stackexchange.com/a/112024/151352
 
  - You can combine `sed` commands:
@@ -35,6 +36,7 @@ http://unix.stackexchange.com/a/112024/151352
         sed -i 's/foo/bar/g; s/baz/zab/g; s/Alice/Joan/g' file
 
  Be aware that order matters (`sed 's/foo/bar/g; s/bar/baz/g'` will substitute `foo` with `baz`).
+
 
 
 
