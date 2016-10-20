@@ -3,6 +3,8 @@ Skip first k lines of a file:
 
 Skip first 3 lines of a file:  
 `tail -n +4 filename`  
+`awk 'NR>2' filename`  
+http://stackoverflow.com/a/3508070/188963
 
 Skip last k lines of a file:  
 `head -n -k filename`  
