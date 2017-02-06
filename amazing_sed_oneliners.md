@@ -6,57 +6,68 @@ Latest version of this file (in English) is usually at:
    http://sed.sourceforge.net/sed1line.txt
    http://www.pement.org/sed/sed1line.txt
 
-This file will also available in other languages:
-  Chinese     - http://sed.sourceforge.net/sed1line_zh-CN.html
-  Czech       - http://sed.sourceforge.net/sed1line_cz.html
-  Dutch       - http://sed.sourceforge.net/sed1line_nl.html
-  French      - http://sed.sourceforge.net/sed1line_fr.html
-  German      - http://sed.sourceforge.net/sed1line_de.html
-  Italian     - (pending)
-  Portuguese  - http://sed.sourceforge.net/sed1line_pt-BR.html
-  Spanish     - (pending)
+This file will also available in other languages:  
+  Chinese     - http://sed.sourceforge.net/sed1line_zh-CN.html  
+  Czech       - http://sed.sourceforge.net/sed1line_cz.html  
+  Dutch       - http://sed.sourceforge.net/sed1line_nl.html  
+  French      - http://sed.sourceforge.net/sed1line_fr.html  
+  German      - http://sed.sourceforge.net/sed1line_de.html  
+  Italian     - (pending)  
+  Portuguese  - http://sed.sourceforge.net/sed1line_pt-BR.html  
+  Spanish     - (pending)  
 
 
 # FILE SPACING:
 
 ## double space a file
- sed G
+ 
+    sed G
 
 * double space a file which already has blank lines in it. Output file
   should contain no more than one blank line between lines of text.
+    
     sed '/^$/d;G'
 
 * triple space a file
+    
     sed 'G;G'
 
 * undo double-spacing (assumes even-numbered lines are always blank)
+    
     sed 'n;d'
 
 * insert a blank line above every line which matches "regex"
+    
     sed '/regex/{x;p;x;}'
 
 * insert a blank line below every line which matches "regex"
+    
     sed '/regex/G'
 
 * insert a blank line above and below every line which matches "regex"
+    
     sed '/regex/{x;p;x;G;}'
 
 # NUMBERING:
 
 * number each line of a file (simple left alignment). Using a tab (see
   note on '\t' at end of file) instead of space will preserve margins.
+    
     sed = filename | sed 'N;s/\n/\t/'
 
 * number each line of a file (number on left, right-aligned)
+    
     sed = filename | sed 'N; s/^/     /; s/ *\(.\{6,\}\)\n/\1  /'
 
 * number each line of file, but only print numbers if line is not blank
+    
     sed '/./=' filename | sed '/./N; s/\n/ /'
 
 * count lines (emulates "wc -l")
+    
     sed -n '$='
 
-TEXT CONVERSION AND SUBSTITUTION:
+# TEXT CONVERSION AND SUBSTITUTION:
 
  # IN UNIX ENVIRONMENT: convert DOS newlines (CR/LF) to Unix format.
  sed 's/.$//'               # assumes that all lines end with CR/LF
