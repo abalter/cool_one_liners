@@ -26,82 +26,89 @@ This file will also available in other languages:
 * double space a file which already has blank lines in it. Output file
   should contain no more than one blank line between lines of text.
     
-    sed '/^$/d;G'
+      sed '/^$/d;G'
 
 * triple space a file
     
-    sed 'G;G'
+      sed 'G;G'
 
 * undo double-spacing (assumes even-numbered lines are always blank)
     
-    sed 'n;d'
+      sed 'n;d'
 
 * insert a blank line above every line which matches "regex"
     
-    sed '/regex/{x;p;x;}'
+      sed '/regex/{x;p;x;}'
 
 * insert a blank line below every line which matches "regex"
     
-    sed '/regex/G'
+      sed '/regex/G'
 
 * insert a blank line above and below every line which matches "regex"
     
-    sed '/regex/{x;p;x;G;}'
+      sed '/regex/{x;p;x;G;}'
 
 # NUMBERING:
 
 * number each line of a file (simple left alignment). Using a tab (see
   note on '\t' at end of file) instead of space will preserve margins.
     
-    sed = filename | sed 'N;s/\n/\t/'
+      sed = filename | sed 'N;s/\n/\t/'
 
 * number each line of a file (number on left, right-aligned)
     
-    sed = filename | sed 'N; s/^/     /; s/ *\(.\{6,\}\)\n/\1  /'
+      sed = filename | sed 'N; s/^/     /; s/ *\(.\{6,\}\)\n/\1  /'
 
 * number each line of file, but only print numbers if line is not blank
     
-    sed '/./=' filename | sed '/./N; s/\n/ /'
+      sed '/./=' filename | sed '/./N; s/\n/ /'
 
 * count lines (emulates "wc -l")
     
-    sed -n '$='
+      sed -n '$='
 
 # TEXT CONVERSION AND SUBSTITUTION:
 
- # IN UNIX ENVIRONMENT: convert DOS newlines (CR/LF) to Unix format.
- sed 's/.$//'               # assumes that all lines end with CR/LF
- sed 's/^M$//'              # in bash/tcsh, press Ctrl-V then Ctrl-M
- sed 's/\x0D$//'            # works on ssed, gsed 3.02.80 or higher
+* IN UNIX ENVIRONMENT: convert DOS newlines (CR/LF) to Unix format.
 
- # IN UNIX ENVIRONMENT: convert Unix newlines (LF) to DOS format.
- sed "s/$/`echo -e \\\r`/"            # command line under ksh
- sed 's/$'"/`echo \\\r`/"             # command line under bash
- sed "s/$/`echo \\\r`/"               # command line under zsh
- sed 's/$/\r/'                        # gsed 3.02.80 or higher
+      sed 's/.$//'               # assumes that all lines end with CR/LF  
+      sed 's/^M$//'              # in bash/tcsh, press Ctrl-V then Ctrl-M  
+      sed 's/\x0D$//'            # works on ssed, gsed 3.02.80 or higher  
 
- # IN DOS ENVIRONMENT: convert Unix newlines (LF) to DOS format.
- sed "s/$//"                          # method 1
- sed -n p                             # method 2
+* IN UNIX ENVIRONMENT: convert Unix newlines (LF) to DOS format.
+ 
+      sed "s/$/`echo -e \\\r`/"            # command line under ksh
+      sed 's/$'"/`echo \\\r`/"             # command line under bash
+      sed "s/$/`echo \\\r`/"               # command line under zsh
+      sed 's/$/\r/'                        # gsed 3.02.80 or higher
 
- # IN DOS ENVIRONMENT: convert DOS newlines (CR/LF) to Unix format.
- # Can only be done with UnxUtils sed, version 4.0.7 or higher. The
- # UnxUtils version can be identified by the custom "--text" switch
- # which appears when you use the "--help" switch. Otherwise, changing
- # DOS newlines to Unix newlines cannot be done with sed in a DOS
- # environment. Use "tr" instead.
- sed "s/\r//" infile >outfile         # UnxUtils sed v4.0.7 or higher
- tr -d \r <infile >outfile            # GNU tr version 1.22 or higher
+* IN DOS ENVIRONMENT: convert Unix newlines (LF) to DOS format.
+      
+      sed "s/$//"                          # method 1
+      sed -n p                             # method 2
 
- # delete leading whitespace (spaces, tabs) from front of each line
- # aligns all text flush left
- sed 's/^[ \t]*//'                    # see note on '\t' at end of file
+* IN DOS ENVIRONMENT: convert DOS newlines (CR/LF) to Unix format.
+  Can only be done with UnxUtils sed, version 4.0.7 or higher. The
+  UnxUtils version can be identified by the custom "--text" switch
+  which appears when you use the "--help" switch. Otherwise, changing
+  DOS newlines to Unix newlines cannot be done with sed in a DOS
+  environment. Use "tr" instead.
+ 
+     sed "s/\r//" infile >outfile         # UnxUtils sed v4.0.7 or higher
+     tr -d \r <infile >outfile            # GNU tr version 1.22 or higher  
 
- # delete trailing whitespace (spaces, tabs) from end of each line
- sed 's/[ \t]*$//'                    # see note on '\t' at end of file
+* delete leading whitespace (spaces, tabs) from front of each line
+   aligns all text flush left 
+ 
+     sed 's/^[ \t]*//'                    # see note on '\t' at end of file
 
- # delete BOTH leading and trailing whitespace from each line
- sed 's/^[ \t]*//;s/[ \t]*$//'
+* delete trailing whitespace (spaces, tabs) from end of each line
+ 
+     sed 's/[ \t]*$//'                    # see note on '\t' at end of file
+
+* delete BOTH leading and trailing whitespace from each line
+ 
+     sed 's/^[ \t]*//;s/[ \t]*$//'
 
  # insert 5 blank spaces at beginning of each line (make page offset)
  sed 's/^/     /'
