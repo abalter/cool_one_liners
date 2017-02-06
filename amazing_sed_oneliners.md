@@ -1,10 +1,10 @@
--------------------------------------------------------------------------
-USEFUL ONE-LINE SCRIPTS FOR SED (Unix stream editor)        Dec. 29, 2005
+# USEFUL ONE-LINE SCRIPTS FOR SED (Unix stream editor)
+Dec. 29, 2005
 Compiled by Eric Pement - pemente[at]northpark[dot]edu        version 5.5
 
-Latest version of this file (in English) is usually at:
-   http://sed.sourceforge.net/sed1line.txt
-   http://www.pement.org/sed/sed1line.txt
+Latest version of this file (in English) is usually at:  
+   http://sed.sourceforge.net/sed1line.txt  
+   http://www.pement.org/sed/sed1line.txt  
 
 This file will also available in other languages:  
   Chinese     - http://sed.sourceforge.net/sed1line_zh-CN.html  
@@ -17,9 +17,9 @@ This file will also available in other languages:
   Spanish     - (pending)  
 
 
-# FILE SPACING:
+## FILE SPACING:
 
-## double space a file
+### double space a file
  
     sed G
 
@@ -48,7 +48,7 @@ This file will also available in other languages:
     
         sed '/regex/{x;p;x;G;}'
 
-# NUMBERING:
+## NUMBERING:
 
 * number each line of a file (simple left alignment). Using a tab (see
   note on '\t' at end of file) instead of space will preserve margins.
@@ -67,7 +67,7 @@ This file will also available in other languages:
     
         sed -n '$='
 
-# TEXT CONVERSION AND SUBSTITUTION:
+## TEXT CONVERSION AND SUBSTITUTION:
 
 * IN UNIX ENVIRONMENT: convert DOS newlines (CR/LF) to Unix format.
 
@@ -127,7 +127,7 @@ This file will also available in other languages:
       sed  -e :a -e 's/^.\{1,77\}$/ & /;ta'                     # method 1
       sed  -e :a -e 's/^.\{1,77\}$/ &/;ta' -e 's/\( *\)\1/\1/'  # method 2
 
- * substitute (find and replace) "foo" with "bar" on each line  
+* substitute (find and replace) "foo" with "bar" on each line  
  
        sed 's/foo/bar/'             # replaces only 1st instance in a line
        sed 's/foo/bar/4'            # replaces only 4th instance in a line
@@ -135,54 +135,54 @@ This file will also available in other languages:
        sed 's/\(.*\)foo\(.*foo\)/\1bar\2/' # replace the next-to-last case
        sed 's/\(.*\)foo/\1bar/'            # replace only the last case
 
- * ubstitute "foo" with "bar" ONLY for lines which contain "baz"
+* ubstitute "foo" with "bar" ONLY for lines which contain "baz"
  
        sed '/baz/s/foo/bar/g'
 
- * substitute "foo" with "bar" EXCEPT for lines which contain "baz"
+* substitute "foo" with "bar" EXCEPT for lines which contain "baz"
  
        sed '/baz/!s/foo/bar/g'
 
- * change "scarlet" or "ruby" or "puce" to "red"
+* change "scarlet" or "ruby" or "puce" to "red"
  
        sed 's/scarlet/red/g;s/ruby/red/g;s/puce/red/g'   # most seds
        gsed 's/scarlet\|ruby\|puce/red/g'                # GNU sed only
 
- * reverse order of lines (emulates "tac")
+* reverse order of lines (emulates "tac")
    bug/feature in HHsed v1.5 causes blank lines to be deleted
  
        sed '1!G;h;$!d'               # method 1
        sed -n '1!G;h;$p'             # method 2
 
- * reverse each character on the line (emulates "rev")
+* reverse each character on the line (emulates "rev")
  
         sed '/\n/!G;s/\(.\)\(.*\n\)/&\2\1/;//D;s/.//'
 
- * join pairs of lines side-by-side (like "paste")
+* join pairs of lines side-by-side (like "paste")
         
         sed '$!N;s/\n/ /'
 
- * if a line ends with a backslash, append the next line to it
+* if a line ends with a backslash, append the next line to it
  
         sed -e :a -e '/\\$/N; s/\\\n//; ta'
 
- * if a line begins with an equal sign, append it to the previous line
+* if a line begins with an equal sign, append it to the previous line
   and replace the "=" with a single space
  
         sed -e :a -e '$!N;s/\n=/ /;ta' -e 'P;D'
 
- # add commas to numeric strings, changing "1234567" to "1,234,567"
+* add commas to numeric strings, changing "1234567" to "1,234,567"
  gsed ':a;s/\B[0-9]\{3\}\>/,&/;ta'                     # GNU sed
  sed -e :a -e 's/\(.*[0-9]\)\([0-9]\{3\}\)/\1,\2/;ta'  # other seds
 
- # add commas to numbers with decimal points and minus signs (GNU sed)
+* add commas to numbers with decimal points and minus signs (GNU sed)
  gsed -r ':a;s/(^|[^0-9.])([0-9]+)([0-9]{3})/\1\2,\3/g;ta'
 
- # add a blank line every 5 lines (after lines 5, 10, 15, 20, etc.)
+* add a blank line every 5 lines (after lines 5, 10, 15, 20, etc.)
  gsed '0~5G'                  # GNU sed only
  sed 'n;n;n;n;G;'             # other seds
 
-SELECTIVE PRINTING OF CERTAIN LINES:
+## SELECTIVE PRINTING OF CERTAIN LINES:
 
  # print first 10 lines of file (emulates behavior of "head")
  sed 10q
