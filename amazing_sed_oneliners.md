@@ -98,9 +98,9 @@ This file will also available in other languages:
        tr -d \r <infile >outfile            # GNU tr version 1.22 or higher  
 
 * delete leading whitespace (spaces, tabs) from front of each line
-   aligns all text flush left 
+  aligns all text flush left 
  
-       sed 's/^[ \t]*//'                    # see note on '\t' at end of file
+      sed 's/^[ \t]*//'                    # see note on '\t' at end of file
 
 * delete trailing whitespace (spaces, tabs) from end of each line
  
